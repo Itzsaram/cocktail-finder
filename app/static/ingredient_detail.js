@@ -105,7 +105,7 @@ function renderDetail() {
             const cCat  = escapeHtml(c.category_name);
             const cAmt  = escapeHtml(c.amount);
             const img   = c.image_path
-                ? `<img src="/static/${escapeHtml(c.image_path)}" alt="${cName}">`
+                ? `<img src="${escapeHtml(imgUrl(c.image_path))}" alt="${cName}">`
                 : '<span class="result-img-placeholder">🍹</span>';
             return `
             <div class="result-card" onclick="window.location.href='/cocktail/${c.cocktail_id}'">

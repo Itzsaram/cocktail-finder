@@ -188,7 +188,7 @@ function renderAlmostCard(c) {
     const ings = escapeHtml(c.ingredients) || '재료 정보 없음';
     const miss = escapeHtml(c.missing_ingredient || '');
     const img  = c.image_path
-        ? `<img src="/static/${escapeHtml(c.image_path)}" alt="${name}">`
+        ? `<img src="${escapeHtml(imgUrl(c.image_path))}" alt="${name}">`
         : '<span class="result-img-placeholder">🍹</span>';
     return `
         <div class="result-card" onclick="window.location.href='/cocktail/${c.cocktail_id}'">
