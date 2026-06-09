@@ -89,7 +89,7 @@ function renderDetail() {
 
     const imgWrap = document.getElementById('detailImgWrap');
     if (c.image_path) {
-        imgWrap.innerHTML = `<img src="/static/${escapeHtml(c.image_path)}" alt="${escapeHtml(c.cocktail_name)}">`;
+        imgWrap.innerHTML = `<img src="${escapeHtml(imgUrl(c.image_path))}" alt="${escapeHtml(c.cocktail_name)}">`;
     }
 
     document.getElementById('detailCategory').textContent = c.category_name;
@@ -209,7 +209,7 @@ function openEditModal() {
     document.getElementById('editError').classList.remove('show');
     document.getElementById('editImage').value   = '';
     document.getElementById('editImagePreview').innerHTML = c.image_path
-        ? `<img src="/static/${c.image_path}" alt="현재 이미지">`
+        ? `<img src="${imgUrl(c.image_path)}" alt="현재 이미지">`
         : '';
 
     // 카테고리 선택
@@ -419,7 +419,7 @@ function renderCommentItem(c) {
         ? `<button class="btn-report btn-report-comment" onclick="openReportModal('comment', ${c.comment_id}, this)">🚨</button>`
         : '';
     const avatar = c.profile_image
-        ? `<div class="comment-avatar" style="background-image:url('/static/${escapeHtml(c.profile_image)}')"></div>`
+        ? `<div class="comment-avatar" style="background-image:url('${escapeHtml(imgUrl(c.profile_image))}')"></div>`
         : `<div class="comment-avatar comment-avatar--default">🍹</div>`;
     return `
         <div class="comment-item" id="comment-${c.comment_id}">

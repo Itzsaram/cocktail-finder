@@ -61,7 +61,7 @@ function renderAvatar(imagePath) {
     const el = document.getElementById('profileAvatar');
     if (!el) return;
     if (imagePath) {
-        el.style.backgroundImage = `url('/static/${escapeHtml(imagePath)}')`;
+        el.style.backgroundImage = `url('${escapeHtml(imgUrl(imagePath))}')`;
         el.classList.add('has-image');
     } else {
         el.style.backgroundImage = '';
@@ -215,7 +215,7 @@ async function loadMyCocktails(append = false) {
                 const cat  = escapeHtml(c.category_name);
                 const ings = escapeHtml(c.ingredients) || '재료 정보 없음';
                 const img  = c.image_path
-                    ? `<img src="/static/${escapeHtml(c.image_path)}" alt="${name}">`
+                    ? `<img src="${escapeHtml(imgUrl(c.image_path))}" alt="${name}">`
                     : '<span class="result-img-placeholder">🍹</span>';
                 return `
                     <div class="my-item-row">

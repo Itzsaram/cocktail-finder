@@ -42,7 +42,7 @@ async function loadUserInfo() {
 function renderUserInfo(u) {
     const avatar = document.getElementById('profileAvatar');
     if (u.profile_image) {
-        avatar.style.backgroundImage = `url('/static/${escapeHtml(u.profile_image)}')`;
+        avatar.style.backgroundImage = `url('${escapeHtml(imgUrl(u.profile_image))}')`;
         avatar.classList.add('has-image');
     }
 

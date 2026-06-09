@@ -52,6 +52,12 @@ function normalize(str) {
     return str.toLowerCase().replace(/[^a-z0-9가-힣]/g, '');
 }
 
+// ── 이미지 URL 헬퍼 (Cloudinary URL or 로컬 /static/ 경로) ────
+function imgUrl(path) {
+    if (!path) return null;
+    return path.startsWith('http') ? path : `/static/${path}`;
+}
+
 // ── 카테고리 내 재료 실시간 검색 필터 ─────────────────────────
 function filterIngredients(inputEl) {
     const keyword = normalize(inputEl.value);
@@ -135,7 +141,7 @@ function renderResultCard(c) {
     const cat  = escapeHtml(c.category_name);
     const ings = escapeHtml(c.ingredients) || '재료 정보 없음';
     const img  = c.image_path
-        ? `<img src="/static/${escapeHtml(c.image_path)}" alt="${name}">`
+        ? `<img src="${escapeHtml(imgUrl(c.image_path))}" alt="${name}">`
         : '<span class="result-img-placeholder">🍹</span>';
 
     return `

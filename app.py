@@ -10,15 +10,27 @@ from datetime import datetime, timedelta
 import bcrypt
 import uuid
 from flask_wtf.csrf import CSRFProtect
+import cloudinary
+import cloudinary.uploader
 
 app = Flask(__name__, template_folder='app/templates', static_folder='app/static')
 app.secret_key = os.environ.get('SECRET_KEY', 'dev-only-insecure-key-change-in-production')
 csrf = CSRFProtect(app)
 
 # 이미지 업로드 설정
-UPLOAD_FOLDER    = os.path.join(os.path.dirname(__file__), 'app', 'static', 'uploads')
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'webp'}
 MAX_IMAGE_SIZE   = 10 * 1024 * 1024   # 10 MB
+
+# Cloudinary 설정
+cloudinary.config(
+    cloud_name = os.environ.get('CLOUDINARY_CLOUD_NAME'),
+    api_key    = os.environ.get('CLOUDINARY_API_KEY'),
+    api_secret = os.environ.get('CLOUDINARY_API_SECRET'),
+)
+_CLOUDINARY_CONFIGURED = bool(os.environ.get('CLOUDINARY_CLOUD_NAME'))
+
+# 로컬 fallback 경로 (개발 환경)
+UPLOAD_FOLDER = os.path.join(os.path.dirname(__file__), 'app', 'static', 'uploads')
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 
 def allowed_file(filename):
@@ -26,21 +38,31 @@ def allowed_file(filename):
 
 def check_image_size(file):
     """파일 크기가 10MB 이하인지 확인. 초과 시 False 반환."""
-    file.seek(0, 2)           # 파일 끝으로 이동
+    file.seek(0, 2)
     size = file.tell()
-    file.seek(0)              # 포인터 초기화
+    file.seek(0)
     return size <= MAX_IMAGE_SIZE
 
 def save_image(file):
-    """이미지 저장 후 상대 경로 반환. 실패 시 None 반환."""
+    """이미지 저장. Cloudinary 설정 시 URL 반환, 미설정 시 로컬 상대경로 반환. 실패 시 None 반환."""
     if not (file and file.filename and allowed_file(file.filename)):
         return None
     if not check_image_size(file):
         return 'TOO_LARGE'
-    ext      = file.filename.rsplit('.', 1)[1].lower()
-    filename = f"{uuid.uuid4().hex}.{ext}"
-    file.save(os.path.join(UPLOAD_FOLDER, filename))
-    return f"uploads/{filename}"
+    if _CLOUDINARY_CONFIGURED:
+        file.seek(0)
+        result = cloudinary.uploader.upload(
+            file,
+            folder='cocktail-finder',
+            public_id=uuid.uuid4().hex,
+            overwrite=False,
+        )
+        return result.get('secure_url')
+    else:
+        ext      = file.filename.rsplit('.', 1)[1].lower()
+        filename = f"{uuid.uuid4().hex}.{ext}"
+        file.save(os.path.join(UPLOAD_FOLDER, filename))
+        return f"uploads/{filename}"
 
 # PostgreSQL 연결 설정
 DATABASE_URL = os.environ.get('DATABASE_URL')
