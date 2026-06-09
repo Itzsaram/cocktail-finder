@@ -319,7 +319,7 @@ async function loadPopularCocktails() {
             const name = escapeHtml(c.cocktail_name);
             const ings = escapeHtml(c.ingredients) || '재료 정보 없음';
             const img  = c.image_path
-                ? `<img src="/static/${escapeHtml(c.image_path)}" alt="${name}" class="card-img">`
+                ? `<div class="card-img-wrap"><img src="/static/${escapeHtml(c.image_path)}" alt="${name}" class="card-img"></div>`
                 : '<div class="card-image">🍹</div>';
             return `
                 <div class="cocktail-card" onclick="window.location.href='/cocktail/${c.cocktail_id}'">
