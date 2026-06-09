@@ -1,0 +1,91 @@
+/* ============================================================
+   auth.css  —  로그인 / 회원가입 공통 스타일
+   login.html · signup.html 에서 공유합니다.
+   공통 변수·폼·버튼은 base.css에서, 인증 레이아웃은 여기서 관리합니다.
+   ============================================================ */
+
+/* 인증 페이지는 컨텐츠를 화면 중앙에 배치 */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.auth-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 52px 44px;
+    width: 100%;
+    max-width: 460px;   /* signup 기준; login은 modifier로 좁힘 */
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+}
+
+/* 로그인 박스는 약간 더 좁게 */
+.auth-box--narrow { max-width: 420px; }
+
+.auth-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.auth-header .logo {
+    font-size: 24px;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.auth-subtitle {
+    font-size: 18px;
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.auth-footer {
+    text-align: center;
+    margin-top: 28px;
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+}
+
+.auth-footer p {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+}
+
+.auth-footer a {
+    color: var(--samsung-blue);
+    font-weight: 600;
+    font-size: 13px;
+    transition: color var(--transition-fast);
+}
+
+.auth-footer a:hover {
+    color: var(--samsung-blue-hover);
+    text-decoration: underline;
+}
+
+/* ── 반응형 ──────────────────────────────────────────────── */
+@media (max-width: 480px) {
+    .auth-box {
+        padding: 36px 24px;
+        border-radius: var(--radius);
+    }
+}

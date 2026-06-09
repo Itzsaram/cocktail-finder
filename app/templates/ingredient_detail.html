@@ -1,0 +1,148 @@
+{% extends 'base.html' %}
+{% block title %}재료 상세 - COCKTAIL FINDER{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='ingredient_detail.css') }}">
+{% endblock %}
+
+{% block content %}
+        <div id="loadingState" class="loading-state">재료 정보를 불러오는 중...</div>
+
+        <div id="detailContent" style="display:none">
+
+            <button class="btn-back" onclick="goBack()">← 뒤로가기</button>
+
+            <!-- 재료 정보 카드 -->
+            <section class="ing-detail-card">
+                <div class="ing-icon">🧪</div>
+                <div class="ing-info">
+                    <div class="ing-category" id="ingCategory"></div>
+                    <h2 class="ing-name" id="ingName"></h2>
+                    <div class="ing-meta-row">
+                        <span class="ing-unit-badge" id="ingUnit"></span>
+                        <span class="ing-desc" id="ingDesc"></span>
+                    </div>
+                    <div class="ing-author" id="ingAuthor"></div>
+                </div>
+
+                <!-- 수정/삭제 버튼 (소유자 또는 관리자, JS에서 표시 결정) -->
+                {% if current_user %}
+                <div class="admin-actions" id="ownerActions" style="display:none">
+                    <button class="btn-admin-edit" onclick="openEditModal()">✏️ 수정</button>
+                    <button class="btn-admin-delete" onclick="deleteIngredient()">🗑️ 삭제</button>
+                </div>
+                {% endif %}
+
+                <!-- 캐비닛 버튼 (로그인 사용자 전체) -->
+                {% if current_user %}
+                <div class="ing-actions-row">
+                    <button class="btn-cabinet" id="cabinetBtn" onclick="toggleCabinet()">
+                        <span id="cabinetIcon">🗄️</span>
+                        <span id="cabinetText">캐비닛에 담기</span>
+                    </button>
+                    <!-- 신고 버튼 (비소유자, 비관리자 — JS에서 표시 결정) -->
+                    <button class="btn-report" id="ingReportBtn" style="display:none"
+                            onclick="openReportModal('ingredient', INGREDIENT_ID, this)">🚨 신고</button>
+                </div>
+                {% endif %}
+            </section>
+
+            <!-- 사용 칵테일 -->
+            <section class="cocktail-usage-section">
+                <h3 class="section-title">🍸 이 재료를 사용하는 칵테일 <span class="usage-count" id="usageCount"></span></h3>
+                <div id="cocktailList" class="cocktail-usage-list"></div>
+            </section>
+
+        </div>
+
+        <!-- 수정 모달 (소유자 또는 관리자) -->
+        {% if current_user %}
+        <div class="modal-overlay" id="editModal" onclick="closeEditModalOutside(event)">
+            <div class="modal-box">
+                <div class="modal-header">
+                    <h3 class="modal-title">✏️ 재료 수정</h3>
+                    <button class="modal-close" onclick="closeEditModal()">✕</button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>재료명 <span class="required">*</span></label>
+                        <input type="text" id="editName" maxlength="100">
+                    </div>
+
+                    <div class="form-group">
+                        <label>카테고리 <span class="required">*</span></label>
+                        <select id="editCategory"></select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>단위 <span class="required">*</span></label>
+                        <select id="editUnit">
+                            <option value="ml">ml (밀리리터)</option>
+                            <option value="oz">oz (온스)</option>
+                            <option value="dash">dash (대시)</option>
+                            <option value="tsp">tsp (티스푼)</option>
+                            <option value="개">개</option>
+                            <option value="잎">잎</option>
+                            <option value="꼬집">꼬집</option>
+                            <option value="g">g (그램)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>설명</label>
+                        <textarea id="editDesc" rows="3" placeholder="재료 설명 (선택)"></textarea>
+                    </div>
+
+                    <div class="error-message" id="editError"></div>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn-modal-cancel" onclick="closeEditModal()">취소</button>
+                    <button class="btn-modal-submit" onclick="submitEdit()">저장</button>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <!-- ── 신고 모달 ────────────────────────────────────── -->
+        {% if current_user %}
+        <div class="modal-overlay modal-sm" id="reportModal" onclick="closeReportModalOutside(event)">
+            <div class="modal-box">
+                <div class="modal-header">
+                    <h3 class="modal-title">🚨 신고하기</h3>
+                    <button class="modal-close" onclick="closeReportModal()">✕</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>신고 사유 <span class="required">*</span></label>
+                        <select id="reportReason">
+                            <option value="">사유를 선택하세요</option>
+                            <option value="spam">스팸</option>
+                            <option value="inappropriate">부적절한 내용</option>
+                            <option value="copyright">저작권 침해</option>
+                            <option value="hate_speech">욕설/혐오 표현</option>
+                            <option value="false_info">허위 정보</option>
+                        </select>
+                    </div>
+                    <div class="error-message" id="reportError"></div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn-modal-cancel" onclick="closeReportModal()">취소</button>
+                    <button class="btn-modal-submit" onclick="submitReport()">신고</button>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+{% endblock %}
+
+{% block scripts %}
+<script>
+    const INGREDIENT_ID    = {{ ingredient_id }};
+    const IS_ADMIN         = {{ 'true' if current_user and current_user.is_admin else 'false' }};
+    const CURRENT_USER_ID  = {{ current_user.user_id | tojson if current_user else 'null' }};
+    const IS_LOGGED_IN     = {{ 'true' if current_user else 'false' }};
+</script>
+<script src="{{ url_for('static', filename='utils.js') }}"></script>
+<script src="{{ url_for('static', filename='ingredient_detail.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% block title %}COCKTAIL FINDER{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+{% endblock %}
+
+{% block content %}
+        <!-- 검색 섹션 -->
+        <section class="search-section">
+            <!-- 검색 타입 탭 -->
+            <div class="search-tabs">
+                <button class="search-tab active" id="tabCocktail" onclick="setSearchType('cocktail')">🍸 칵테일</button>
+                <button class="search-tab" id="tabIngredient" onclick="setSearchType('ingredient')">🧪 재료</button>
+            </div>
+
+            <div class="search-wrapper">
+                <div class="search-container">
+                    <input type="text" class="search-input" placeholder="칵테일 이름 검색..." id="searchInput"
+                           oninput="handleSuggestionInput()"
+                           onkeydown="handleSearchKeydown(event)"
+                           autocomplete="off">
+                    <button class="search-btn" onclick="handleSearch()">검색</button>
+                </div>
+                <ul class="suggestion-dropdown" id="suggestionDropdown"></ul>
+            </div>
+        </section>
+
+        <!-- 검색 결과 섹션 -->
+        <section class="search-results-section" id="searchResultsSection" style="display:none;">
+            <div class="search-results-header">
+                <span id="searchResultsTitle"></span>
+            </div>
+            <div id="searchResultsList" class="search-results-list"></div>
+        </section>
+
+        <!-- 메인 버튼 섹션 -->
+        <section class="buttons-section">
+            <div class="button-grid">
+                <button class="main-btn cabinet-btn" onclick="handleCabinet()">
+                    <span class="btn-icon">🗄️</span>
+                    <span class="btn-text">CABINET</span>
+                    <span class="btn-desc">나의 재료 보관함</span>
+                </button>
+
+                <button class="main-btn random-btn" onclick="handleRandomCocktail()">
+                    <span class="btn-icon">🎲</span>
+                    <span class="btn-text">RANDOM COCKTAIL</span>
+                    <span class="btn-desc">무작위 칵테일</span>
+                </button>
+
+                <button class="main-btn finder-btn" onclick="handleCocktailFinder()">
+                    <span class="btn-icon">🔍</span>
+                    <span class="btn-text">COCKTAIL FINDER</span>
+                    <span class="btn-desc">고급 검색</span>
+                </button>
+
+                <button class="main-btn cabinet-search-btn" onclick="handleCabinetSearch()">
+                    <span class="btn-icon">🗄️</span>
+                    <span class="btn-text">캐비닛 검색</span>
+                    <span class="btn-desc">보유 재료로 검색</span>
+                </button>
+
+                <button class="main-btn upload-btn" onclick="handleUpload()">
+                    <span class="btn-icon">⬆️</span>
+                    <span class="btn-text">UPLOAD</span>
+                    <span class="btn-desc">칵테일 업로드</span>
+                </button>
+
+                <button class="main-btn ingredient-upload-btn" onclick="handleIngredientUpload()">
+                    <span class="btn-icon">🧪</span>
+                    <span class="btn-text">재료 업로드</span>
+                    <span class="btn-desc">새 재료 추가</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- 인기 칵테일 섹션 -->
+        <section class="popular-section">
+            <h2>🏆 인기 칵테일 <span class="popular-subtitle">댓글 순</span></h2>
+            <div class="cocktail-cards" id="popularCocktailCards">
+                <p class="popular-loading">불러오는 중...</p>
+            </div>
+        </section>
+
+        <!-- 푸터 -->
+        <footer>
+            <p>&copy; 2024 Cocktail Finder. All rights reserved.</p>
+        </footer>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='utils.js') }}"></script>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+{% endblock %}

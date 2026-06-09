@@ -1,0 +1,107 @@
+/* ============================================================
+   upload_ingredient.css  —  재료 업로드 페이지 전용 스타일
+   공통 스타일은 base.css에서 관리합니다.
+   ============================================================ */
+
+.upload-header {
+    margin-bottom: 36px;
+}
+
+.upload-header h2 {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+}
+
+.upload-desc {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+/* ── 업로드 폼 카드 ──────────────────────────────────────── */
+.upload-section {
+    max-width: 560px;
+}
+
+.upload-form {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 36px;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* 필수 표시 */
+.required {
+    color: var(--samsung-blue);
+    font-weight: 700;
+}
+
+/* select 스타일 (base.css input 스타일과 통일) */
+select {
+    padding: 12px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--bg);
+    color: var(--text-primary);
+    font-size: 15px;
+    font-family: inherit;
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23444' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    padding-right: 40px;
+    transition: border-color var(--transition-fast),
+                box-shadow var(--transition-fast);
+}
+
+select:focus {
+    outline: none;
+    border-color: var(--samsung-blue);
+    background-color: var(--surface);
+    box-shadow: 0 0 0 3px rgba(20,40,160,0.08);
+}
+
+/* textarea 스타일 */
+textarea {
+    padding: 12px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--bg);
+    color: var(--text-primary);
+    font-size: 15px;
+    font-family: inherit;
+    resize: vertical;
+    min-height: 90px;
+    transition: border-color var(--transition-fast),
+                box-shadow var(--transition-fast);
+}
+
+textarea:focus {
+    outline: none;
+    border-color: var(--samsung-blue);
+    background: var(--surface);
+    box-shadow: 0 0 0 3px rgba(20,40,160,0.08);
+}
+
+textarea::placeholder {
+    color: var(--text-muted);
+}
+
+/* ── 반응형 ──────────────────────────────────────────────── */
+@media (max-width: 768px) {
+    .upload-section {
+        max-width: 100%;
+    }
+
+    .upload-form {
+        padding: 24px 20px;
+    }
+}

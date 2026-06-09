@@ -1,0 +1,133 @@
+/* ============================================================
+   cocktail_finder.css — 고급 검색 페이지 전용 스타일
+   공통 스타일(.loading-state, 아코디언, 결과카드)은 base.css에서 관리합니다.
+   ============================================================ */
+
+/* ── 페이지 헤더 ─────────────────────────────────────────── */
+.finder-header {
+    margin-bottom: 32px;
+}
+
+.finder-header h2 {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+}
+
+.finder-desc {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+/* ── 재료 선택 섹션 ──────────────────────────────────────── */
+.ingredient-section {
+    margin-bottom: 40px;
+}
+
+.ingredient-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+}
+
+.section-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.ingredient-section-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.selected-badge {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--samsung-blue);
+    background: var(--samsung-blue-light);
+    padding: 4px 14px;
+    border-radius: 12px;
+}
+
+.btn-clear {
+    font-size: 13px;
+    font-weight: 600;
+    color: #e53935;
+    background: #fdecea;
+    border: none;
+    border-radius: 12px;
+    padding: 4px 14px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background var(--transition-fast);
+}
+
+.btn-clear:hover { background: #fbc4c4; }
+
+/* ── 검색 버튼 ───────────────────────────────────────────── */
+.btn-search {
+    width: 100%;
+    padding: 14px;
+    background: var(--samsung-blue);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius);
+    font-size: 15px;
+    font-weight: 700;
+    font-family: inherit;
+    cursor: pointer;
+    margin-top: 12px;
+    transition: background var(--transition-fast);
+}
+
+.btn-search:hover:not(:disabled) { background: var(--samsung-blue-hover); }
+
+.btn-search:disabled {
+    background: var(--border);
+    color: var(--text-muted);
+    cursor: not-allowed;
+}
+
+/* ── 결과 섹션 ───────────────────────────────────────────── */
+.results-section {
+    margin-bottom: 60px;
+}
+
+.results-header {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--samsung-blue);
+}
+
+.results-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.results-empty {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 14px;
+    font-weight: 600;
+    padding: 60px 0;
+}
+
+.scroll-sentinel { height: 1px; }
+
+.load-more-state {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 14px;
+    font-weight: 600;
+    padding: 20px 0;
+}

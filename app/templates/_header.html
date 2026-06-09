@@ -1,0 +1,18 @@
+<header>
+    <div class="header-top">
+        <h1 class="logo"><a href="/">🍸 COCKTAIL FINDER</a></h1>
+        <div class="header-buttons">
+            {% if current_user %}
+            <span class="user-greeting">{{ current_user.user_name }}님</span>
+            {% if current_user.is_admin %}
+            <button class="btn-nav btn-nav-ghost btn-nav-admin" onclick="location.href='/admin/reports'">🚨 신고 관리</button>
+            {% endif %}
+            <button class="btn-nav btn-nav-ghost" onclick="location.href='/profile'">프로필</button>
+            <button class="btn-nav btn-nav-ghost"
+                    onclick="if(confirm('로그아웃 하시겠습니까?')) location.href='/logout'">Logout</button>
+            {% else %}
+            <button class="btn-nav" onclick="location.href='/login'">Login</button>
+            {% endif %}
+        </div>
+    </div>
+</header>

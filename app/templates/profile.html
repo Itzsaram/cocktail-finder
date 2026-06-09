@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% block title %}프로필 - COCKTAIL FINDER{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='profile.css') }}">
+{% endblock %}
+
+{% block content %}
+        <div id="loadingState" class="loading-state">프로필을 불러오는 중...</div>
+
+        <div id="profileContent" style="display:none">
+
+            <!-- ── 사용자 정보 카드 ─────────────────────── -->
+            <section class="profile-card">
+                <div class="profile-avatar-wrap" onclick="document.getElementById('avatarInput').click()" title="프로필 사진 변경">
+                    <div class="profile-avatar" id="profileAvatar"></div>
+                    <div class="avatar-overlay">📷</div>
+                    <input type="file" id="avatarInput" accept="image/*" style="display:none" onchange="uploadAvatar(this)">
+                </div>
+                <div class="profile-info">
+                    <div class="profile-name" id="profileName"></div>
+                    <div class="profile-id" id="profileId"></div>
+                    <div class="profile-email" id="profileEmail"></div>
+                    <div class="profile-grade" id="profileGrade"></div>
+                </div>
+            </section>
+
+            <!-- ── 닉네임 변경 ────────────────────────── -->
+            <section class="profile-section">
+                <h3 class="section-title">닉네임 변경</h3>
+                <div class="name-form">
+                    <div class="form-group">
+                        <label for="newNameInput">새 닉네임</label>
+                        <input type="text" id="newNameInput" placeholder="새 닉네임을 입력하세요" maxlength="20">
+                    </div>
+                    <button class="btn-submit" id="nameSubmitBtn" onclick="submitNameChange()">변경</button>
+                </div>
+                <div class="error-message" id="nameError"></div>
+                <div class="success-message" id="nameSuccess"></div>
+            </section>
+
+            <!-- ── 탭 네비게이션 ──────────────────────── -->
+            <div class="profile-tabs">
+                <button class="tab-btn active" data-tab="saved" onclick="switchTab('saved')">
+                    ❤️ 관심등록 칵테일 <span class="tab-count" id="savedCount"></span>
+                </button>
+                <button class="tab-btn" data-tab="mycocktails" onclick="switchTab('mycocktails')">
+                    🍹 내 칵테일 <span class="tab-count" id="mycocktailsCount"></span>
+                </button>
+                <button class="tab-btn" data-tab="myingredients" onclick="switchTab('myingredients')">
+                    🧪 내 재료 <span class="tab-count" id="myingredientsCount"></span>
+                </button>
+                <button class="tab-btn" data-tab="mycomments" onclick="switchTab('mycomments')">
+                    💬 내 댓글 <span class="tab-count" id="mycommentsCount"></span>
+                </button>
+            </div>
+
+            <!-- ── 탭 패널: 관심등록 칵테일 ──────────── -->
+            <section class="tab-panel active" id="panel-saved">
+                <div id="savedCocktailList" class="content-list"></div>
+            </section>
+
+            <!-- ── 탭 패널: 내 칵테일 ────────────────── -->
+            <section class="tab-panel" id="panel-mycocktails">
+                <div id="myCocktailList" class="content-list"></div>
+            </section>
+
+            <!-- ── 탭 패널: 내 재료 ──────────────────── -->
+            <section class="tab-panel" id="panel-myingredients">
+                <div id="myIngredientList" class="content-list"></div>
+            </section>
+
+            <!-- ── 탭 패널: 내 댓글 ──────────────────── -->
+            <section class="tab-panel" id="panel-mycomments">
+                <div id="myCommentList" class="content-list"></div>
+            </section>
+
+        </div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='utils.js') }}"></script>
+<script src="{{ url_for('static', filename='profile.js') }}"></script>
+{% endblock %}

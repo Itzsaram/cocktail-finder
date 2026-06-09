@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>로그인 - COCKTAIL FINDER</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='auth.css') }}">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-box auth-box--narrow">
+            <div class="auth-header">
+                <h1 class="logo">🍸 COCKTAIL FINDER</h1>
+                <p class="auth-subtitle">로그인</p>
+            </div>
+
+            <form class="auth-form" id="loginForm">
+                <div class="form-group">
+                    <label for="userId">사용자 ID</label>
+                    <input type="text" id="userId" name="userId"
+                           placeholder="사용자 ID를 입력하세요" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">비밀번호</label>
+                    <input type="password" id="password" name="password"
+                           placeholder="비밀번호를 입력하세요" required>
+                </div>
+
+                <div id="errorMessage" class="error-message"></div>
+
+                <button type="submit" class="btn-submit">로그인</button>
+            </form>
+
+            <div class="auth-footer">
+                <p>계정이 없으신가요? <a href="{{ url_for('signup') }}">회원가입</a></p>
+                <p><a href="{{ url_for('index') }}">← 홈으로 돌아가기</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='utils.js') }}"></script>
+    <script src="{{ url_for('static', filename='login.js') }}"></script>
+</body>
+</html>

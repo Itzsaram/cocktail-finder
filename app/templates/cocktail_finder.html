@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block title %}칵테일 파인더 - COCKTAIL FINDER{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='cocktail_finder.css') }}">
+{% endblock %}
+
+{% block content %}
+        <!-- 페이지 제목 -->
+        <section class="finder-header">
+            <h2>🔍 칵테일 파인더</h2>
+            <p class="finder-desc">보유한 재료를 선택하면 만들 수 있는 칵테일을 찾아드립니다.</p>
+        </section>
+
+        <!-- 재료 선택 -->
+        <section class="ingredient-section">
+            <div class="ingredient-section-header">
+                <span class="section-title">재료 선택</span>
+                <div class="ingredient-section-meta">
+                    <span class="selected-badge">선택됨: <span id="selectedCount">0</span>개</span>
+                    <button class="btn-clear" id="clearBtn" onclick="clearSelection()" style="display:none">초기화</button>
+                </div>
+            </div>
+            <div id="ingredientList" class="ingredient-list">
+                <div id="loadingState" class="loading-state">재료 불러오는 중...</div>
+            </div>
+            <button class="btn-search" id="searchBtn" onclick="startSearch()" disabled>
+                선택한 재료로 검색
+            </button>
+        </section>
+
+        <!-- 검색 결과 -->
+        <section class="results-section" id="resultsSection" style="display:none">
+            <div class="results-header">
+                <span id="resultsTitle"></span>
+            </div>
+            <div id="resultsList" class="results-list"></div>
+            <div id="scrollSentinel" class="scroll-sentinel"></div>
+            <div id="loadMoreState" class="load-more-state" style="display:none">불러오는 중...</div>
+        </section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='utils.js') }}"></script>
+<script src="{{ url_for('static', filename='cocktail_finder.js') }}"></script>
+{% endblock %}

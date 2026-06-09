@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% block title %}사용자 프로필 - COCKTAIL FINDER{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='user_profile.css') }}">
+{% endblock %}
+
+{% block content %}
+        <div id="loadingState" class="loading-state">프로필을 불러오는 중...</div>
+
+        <div id="profileContent" style="display:none">
+
+            <!-- ── 사용자 정보 카드 ─────────────────────── -->
+            <section class="profile-card">
+                <div class="profile-avatar" id="profileAvatar"></div>
+                <div class="profile-info">
+                    <div class="profile-name" id="profileName"></div>
+                    <div class="profile-id"   id="profileId"></div>
+                    <div class="profile-grade" id="profileGrade"></div>
+                    <div class="profile-stats" id="profileStats"></div>
+                </div>
+                <!-- 신고 버튼 (로그인 + 타인 프로필, JS에서 표시 결정) -->
+                {% if current_user %}
+                <button class="btn-report" id="userReportBtn" style="display:none"
+                        onclick="openReportModal('user', TARGET_USER_ID, this)">🚨 신고</button>
+                {% endif %}
+            </section>
+
+            <!-- ── 탭 네비게이션 ──────────────────────── -->
+            <div class="profile-tabs">
+                <button class="tab-btn active" data-tab="cocktails" onclick="switchTab('cocktails')">
+                    🍹 업로드한 칵테일 <span class="tab-count" id="cocktailsCount"></span>
+                </button>
+                <button class="tab-btn" data-tab="ingredients" onclick="switchTab('ingredients')">
+                    🧪 등록한 재료 <span class="tab-count" id="ingredientsCount"></span>
+                </button>
+            </div>
+
+            <!-- ── 탭 패널: 칵테일 ────────────────────── -->
+            <section class="tab-panel active" id="panel-cocktails">
+                <div id="cocktailList" class="content-list"></div>
+            </section>
+
+            <!-- ── 탭 패널: 재료 ──────────────────────── -->
+            <section class="tab-panel" id="panel-ingredients">
+                <div id="ingredientList" class="content-list"></div>
+            </section>
+
+        </div>
+
+        <div id="notFound" style="display:none" class="loading-state">존재하지 않는 사용자입니다.</div>
+
+        <!-- ── 신고 모달 ────────────────────────────────────── -->
+        {% if current_user %}
+        <div class="modal-overlay modal-sm" id="reportModal" onclick="closeReportModalOutside(event)">
+            <div class="modal-box">
+                <div class="modal-header">
+                    <h3 class="modal-title">🚨 신고하기</h3>
+                    <button class="modal-close" onclick="closeReportModal()">✕</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>신고 사유 <span class="required">*</span></label>
+                        <select id="reportReason">
+                            <option value="">사유를 선택하세요</option>
+                            <option value="spam">스팸</option>
+                            <option value="inappropriate">부적절한 내용</option>
+                            <option value="copyright">저작권 침해</option>
+                            <option value="hate_speech">욕설/혐오 표현</option>
+                            <option value="false_info">허위 정보</option>
+                        </select>
+                    </div>
+                    <div class="error-message" id="reportError"></div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn-modal-cancel" onclick="closeReportModal()">취소</button>
+                    <button class="btn-modal-submit" onclick="submitReport()">신고</button>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+{% endblock %}
+
+{% block scripts %}
+<script>
+    const TARGET_USER_ID = {{ target_user_id | tojson }};
+    const CURRENT_USER_ID = {{ current_user.user_id | tojson if current_user else 'null' }};
+    const IS_ADMIN = {{ 'true' if current_user and current_user.is_admin else 'false' }};
+</script>
+<script src="{{ url_for('static', filename='utils.js') }}"></script>
+<script src="{{ url_for('static', filename='user_profile.js') }}"></script>
+{% endblock %}

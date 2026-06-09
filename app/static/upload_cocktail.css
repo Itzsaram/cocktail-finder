@@ -1,0 +1,200 @@
+/* ============================================================
+   upload_cocktail.css — 칵테일 업로드 페이지 전용 스타일
+   공통 스타일(.loading-state, 아코디언, 결과카드)은 base.css에서 관리합니다.
+   ============================================================ */
+
+/* ── 페이지 헤더 ─────────────────────────────────────────── */
+.upload-header {
+    margin-bottom: 32px;
+}
+
+.upload-header h2 {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+}
+
+.upload-desc {
+    color: var(--text-muted);
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* ── 폼 카드 ─────────────────────────────────────────────── */
+.upload-section {
+    margin-bottom: 60px;
+}
+
+.form-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 28px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow-sm);
+}
+
+.form-card-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+}
+
+.form-card-desc {
+    font-size: 13px;
+    color: var(--text-muted);
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+/* ── 이미지 업로드 ───────────────────────────────────────── */
+.image-upload-area {
+    border: 2px dashed var(--border);
+    border-radius: var(--radius-sm);
+    padding: 32px;
+    text-align: center;
+    cursor: pointer;
+    transition: border-color var(--transition-fast), background var(--transition-fast);
+    position: relative;
+    min-height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-upload-area:hover {
+    border-color: var(--samsung-blue);
+    background: var(--samsung-blue-light);
+}
+
+.image-preview-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.image-upload-icon { font-size: 36px; }
+
+.image-upload-text {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.image-upload-hint {
+    font-size: 12px;
+    color: var(--text-muted);
+}
+
+.image-preview {
+    display: none;
+    max-width: 100%;
+    max-height: 240px;
+    border-radius: var(--radius-sm);
+    object-fit: contain;
+}
+
+.image-preview.visible { display: block; }
+
+/* ── 선택 요약 배지 ──────────────────────────────────────── */
+.selected-summary {
+    display: inline-block;
+    background: var(--samsung-blue-light);
+    color: var(--samsung-blue);
+    font-size: 13px;
+    font-weight: 600;
+    padding: 4px 14px;
+    border-radius: 12px;
+    margin-bottom: 16px;
+}
+
+/* ── 업로드 전용: ingredient-item 세로 레이아웃 오버라이드 ── */
+/* base.css의 .ingredient-item은 가로(row) 배치이지만,
+   업로드 페이지에서는 체크박스 + 양 입력 행이 세로로 쌓여야 합니다. */
+.ingredient-item {
+    flex-direction: column;
+    gap: 8px;
+}
+
+.ingredient-item-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* ── 양 입력 (업로드 전용) ───────────────────────────────── */
+.amount-row {
+    display: none;
+    align-items: center;
+    gap: 6px;
+    padding-top: 4px;
+    border-top: 1px solid var(--border);
+    min-width: 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.ingredient-item.selected .amount-row { display: flex; }
+
+.amount-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    white-space: nowrap;
+}
+
+.amount-input {
+    flex: 1;
+    min-width: 0;
+    width: 0;
+    padding: 5px 8px;
+    border: 1.5px solid var(--border);
+    border-radius: 6px;
+    font-size: 13px;
+    font-family: inherit;
+    color: var(--text-primary);
+    background: var(--surface);
+    transition: border-color var(--transition-fast);
+    box-sizing: border-box;
+}
+
+.amount-input:focus {
+    outline: none;
+    border-color: var(--samsung-blue);
+}
+
+.amount-input.amount-error {
+    border-color: #e53935;
+    background: #fff8f8;
+}
+
+.amount-input.amount-error:focus {
+    border-color: #e53935;
+    box-shadow: 0 0 0 3px rgba(229,57,53,0.1);
+}
+
+.amount-unit-badge {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--samsung-blue);
+    background: var(--samsung-blue-light);
+    padding: 3px 8px;
+    border-radius: 6px;
+    white-space: nowrap;
+}
+
+/* ── 제출 버튼 ───────────────────────────────────────────── */
+.btn-submit {
+    width: 100%;
+    margin-top: 8px;
+}
+
+/* ── 반응형 ──────────────────────────────────────────────── */
+@media (max-width: 768px) {
+    .form-card { padding: 20px 16px; }
+    .ingredient-grid { grid-template-columns: 1fr; }
+}

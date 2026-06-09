@@ -1,0 +1,47 @@
+/* ============================================================
+   cabinet.css  —  재료 보관함 페이지 전용 스타일
+   공통 스타일(.loading-state, 아코디언, 결과카드)은 base.css에서 관리합니다.
+   ============================================================ */
+
+/* ── 페이지 헤더 ─────────────────────────────────────────── */
+.cabinet-header {
+    margin-bottom: 40px;
+}
+
+.cabinet-header h2 {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+}
+
+.cabinet-desc {
+    color: var(--text-muted);
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.cabinet-summary {
+    display: inline-block;
+    background: var(--samsung-blue-light);
+    border-radius: 20px;
+    padding: 6px 16px;
+    font-size: 13px;
+    color: var(--samsung-blue);
+    font-weight: 600;
+}
+
+/* cabinet 전용: 재료 목록 하단 여백 */
+#ingredientList.ingredient-list {
+    margin-bottom: 60px;
+}
+
+/* cabinet 전용: 재료 설명 */
+.ingredient-desc {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    line-height: 1.4;
+}

@@ -1,0 +1,17 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: pg-lab
+    environment:
+      POSTGRES_USER: itzsaram
+      POSTGRES_PASSWORD: 5643
+      POSTGRES_DB: itzsaram_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./init:/docker-entrypoint-initdb.d
+    restart: unless-stopped
+
+volumes:
+  pgdata:

@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% block title %}칵테일 업로드 - COCKTAIL FINDER{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='upload_cocktail.css') }}">
+{% endblock %}
+
+{% block content %}
+        <!-- 페이지 제목 -->
+        <section class="upload-header">
+            <h2>🍹 칵테일 업로드</h2>
+            <p class="upload-desc">새로운 칵테일 레시피를 등록합니다.</p>
+        </section>
+
+        <!-- 업로드 폼 -->
+        <section class="upload-section">
+            <form id="uploadForm" enctype="multipart/form-data">
+
+                <!-- 기본 정보 -->
+                <div class="form-card">
+                    <h3 class="form-card-title">기본 정보</h3>
+
+                    <div class="form-group">
+                        <label for="cocktailName">칵테일 이름 <span class="required">*</span></label>
+                        <input type="text" id="cocktailName" placeholder="칵테일 이름을 입력하세요" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="categorySelect">카테고리 <span class="required">*</span></label>
+                        <select id="categorySelect" required>
+                            <option value="">카테고리 선택...</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="imageInput">칵테일 이미지</label>
+                        <div class="image-upload-area" id="imageUploadArea" onclick="document.getElementById('imageInput').click()">
+                            <div class="image-preview-wrapper" id="imagePreviewWrapper">
+                                <span class="image-upload-icon">📷</span>
+                                <span class="image-upload-text">클릭하여 이미지 업로드</span>
+                                <span class="image-upload-hint">PNG, JPG, WEBP (선택)</span>
+                            </div>
+                            <img id="imagePreview" class="image-preview" alt="미리보기">
+                        </div>
+                        <input type="file" id="imageInput" accept="image/*" style="display:none" onchange="handleImageChange(this)">
+                    </div>
+                </div>
+
+                <!-- 재료 선택 -->
+                <div class="form-card">
+                    <h3 class="form-card-title">재료 선택 <span class="required">*</span></h3>
+                    <p class="form-card-desc">사용할 재료를 선택하고 1인분 기준 양을 입력하세요.</p>
+                    <div class="selected-summary">
+                        선택된 재료: <span id="selectedIngredientCount">0</span>개
+                    </div>
+                    <div id="ingredientList" class="ingredient-list">
+                        <div id="loadingState" class="loading-state">재료 불러오는 중...</div>
+                    </div>
+                </div>
+
+                <!-- 제조법 -->
+                <div class="form-card">
+                    <h3 class="form-card-title">제조법</h3>
+                    <div class="form-group">
+                        <textarea id="recipe" placeholder="칵테일 제조 방법을 순서대로 입력하세요 (선택)" rows="6"></textarea>
+                    </div>
+                </div>
+
+                <div id="errorMessage" class="error-message"></div>
+                <div id="successMessage" class="success-message"></div>
+
+                <button type="submit" class="btn-submit">칵테일 등록</button>
+            </form>
+        </section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='utils.js') }}"></script>
+<script src="{{ url_for('static', filename='upload_cocktail.js') }}"></script>
+{% endblock %}

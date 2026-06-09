@@ -1,0 +1,163 @@
+/* ============================================================
+   admin_reports.css — 신고 관리 페이지 스타일
+   ============================================================ */
+
+.page-title {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 24px;
+    color: var(--text-primary);
+}
+
+/* ── 탭 ──────────────────────────────────────────────────── */
+
+.report-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid var(--border);
+}
+
+.rtab-btn {
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 600;
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    margin-bottom: -2px;
+    cursor: pointer;
+    color: var(--text-secondary);
+    transition: color 0.15s, border-color 0.15s;
+    font-family: inherit;
+}
+
+.rtab-btn.active {
+    color: var(--samsung-blue);
+    border-bottom-color: var(--samsung-blue);
+}
+
+.rtab-badge {
+    font-weight: 400;
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+
+/* ── 테이블 ──────────────────────────────────────────────── */
+
+.report-table-wrap {
+    overflow-x: auto;
+}
+
+.report-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+}
+
+.report-table th {
+    background: var(--surface);
+    padding: 10px 12px;
+    text-align: left;
+    font-weight: 600;
+    color: var(--text-secondary);
+    border-bottom: 2px solid var(--border);
+    white-space: nowrap;
+}
+
+.report-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+    color: var(--text-primary);
+}
+
+.report-table tr:hover td {
+    background: var(--surface);
+}
+
+/* ── 뱃지 ────────────────────────────────────────────────── */
+
+.target-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.target-cocktail   { background: #e0f0ff; color: #0066cc; }
+.target-ingredient { background: #e6f9ef; color: #1a8c4e; }
+.target-comment    { background: #fff3e0; color: #b35900; }
+.target-user       { background: #f3e5f5; color: #7b1fa2; }
+
+.action-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.action-dismissed        { background: #f5f5f5; color: #666; }
+.action-content_modified { background: #e8f5e9; color: #2e7d32; }
+.action-content_deleted  { background: #fdecea; color: #c62828; }
+.action-user_sanctioned  { background: #fff3cd; color: #856404; }
+
+/* ── 링크 / ID ───────────────────────────────────────────── */
+
+.target-link {
+    color: var(--samsung-blue);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.target-link:hover { text-decoration: underline; }
+
+.reporter-id, .target-id {
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+/* ── 처리 버튼 ───────────────────────────────────────────── */
+
+.btn-resolve {
+    padding: 5px 14px;
+    background: var(--samsung-blue);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: inherit;
+    white-space: nowrap;
+    transition: opacity 0.15s;
+}
+
+.btn-resolve:hover { opacity: 0.85; }
+
+/* ── 처리 모달 ───────────────────────────────────────────── */
+
+.resolve-info {
+    background: var(--surface);
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+    margin-bottom: 16px;
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--text-primary);
+}
+
+.resolve-info p { margin: 0; }
+
+/* ── 빈 상태 ─────────────────────────────────────────────── */
+
+.report-empty {
+    padding: 40px;
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 14px;
+}

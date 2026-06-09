@@ -1,0 +1,222 @@
+/* ============================================================
+   cabinet_search.css — 캐비닛 검색 페이지 전용 스타일
+   공통 스타일(.loading-state, result-card)은 base.css에서 관리합니다.
+   ============================================================ */
+
+/* ── 페이지 헤더 (cocktail_finder.css 공유) ──────────────────── */
+.finder-header {
+    margin-bottom: 32px;
+}
+.finder-header h2 {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+}
+.finder-desc {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+/* ── 섹션 공통 ───────────────────────────────────────────────── */
+.cabinet-ing-section,
+.dual-search-section {
+    margin-bottom: 32px;
+}
+
+.ingredient-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.section-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.selected-badge {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--samsung-blue);
+    background: var(--samsung-blue-light);
+    padding: 4px 14px;
+    border-radius: 12px;
+}
+
+/* ── 캐비닛 재료 칩 ──────────────────────────────────────────── */
+.cabinet-chips-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 14px;
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    min-height: 52px;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.cabinet-chip {
+    display: inline-block;
+    padding: 5px 14px;
+    background: var(--samsung-blue-light);
+    color: var(--samsung-blue);
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.cabinet-chip-placeholder {
+    font-size: 14px;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.cabinet-manage-link {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--samsung-blue);
+    text-decoration: none;
+}
+.cabinet-manage-link:hover {
+    text-decoration: underline;
+}
+
+/* ── 이중검색 ────────────────────────────────────────────────── */
+.dual-search-desc {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.dual-search-wrap {
+    position: relative;
+}
+
+.dual-input-wrap {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: 40px;
+    padding: 6px 6px 6px 20px;
+    box-shadow: var(--shadow-sm);
+    transition: border-color var(--transition-fast);
+}
+.dual-input-wrap:focus-within {
+    border-color: var(--samsung-blue);
+}
+
+.dual-search-input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    color: var(--text-primary);
+    font-size: 14px;
+    font-family: inherit;
+    outline: none;
+}
+.dual-search-input::placeholder {
+    color: var(--text-muted);
+}
+
+.dual-clear-btn {
+    padding: 6px 16px;
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-family: inherit;
+    white-space: nowrap;
+    transition: background var(--transition-fast);
+}
+.dual-clear-btn:hover {
+    background: #fdecea;
+    color: #e53935;
+    border-color: #e53935;
+}
+
+/* ── 결과 섹션 ───────────────────────────────────────────────── */
+.results-section {
+    margin-bottom: 60px;
+}
+
+.results-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.cs-section {
+    margin-bottom: 32px;
+}
+
+.cs-section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 11px 16px;
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    font-weight: 700;
+    margin-bottom: 14px;
+}
+
+.cs-header--ok {
+    background: #e8f5e9;
+    color: #2e7d32;
+    border-left: 4px solid #43a047;
+}
+
+.cs-header--almost {
+    background: #fff3e0;
+    color: #e65100;
+    border-left: 4px solid #fb8c00;
+}
+
+.cs-count {
+    margin-left: auto;
+    background: rgba(0, 0, 0, 0.08);
+    padding: 2px 10px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.dual-active-badge {
+    background: rgba(0,0,0,0.07);
+    padding: 2px 10px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.missing-badge {
+    display: inline-block;
+    margin-top: 6px;
+    padding: 3px 12px;
+    background: #fff3e0;
+    color: #e65100;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 700;
+    border: 1px solid #ffcc80;
+}
+
+.results-empty {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 14px;
+    font-weight: 600;
+    padding: 40px 0;
+}

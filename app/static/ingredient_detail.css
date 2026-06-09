@@ -1,0 +1,368 @@
+/* ============================================================
+   ingredient_detail.css — 재료 상세 페이지 전용 스타일
+   공통 스타일(.loading-state, .result-card, 모달)은 base.css /
+   cocktail_detail.css 패턴을 따릅니다.
+   ============================================================ */
+
+.btn-back {
+    display: inline-block;
+    margin-bottom: 24px;
+    background: none;
+    border: none;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-family: inherit;
+    padding: 0;
+    transition: color var(--transition-fast);
+}
+
+.btn-back:hover { color: var(--samsung-blue); }
+
+/* ── 재료 정보 카드 ────────────────────────────────────────── */
+.ing-detail-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 28px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 32px;
+    margin-bottom: 36px;
+    box-shadow: var(--shadow-md);
+    flex-wrap: wrap;
+}
+
+.ing-icon {
+    font-size: 56px;
+    flex-shrink: 0;
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--samsung-blue-light);
+    border-radius: var(--radius);
+}
+
+.ing-info {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.ing-category {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--samsung-blue);
+    background: var(--samsung-blue-light);
+    padding: 3px 12px;
+    border-radius: 12px;
+    width: fit-content;
+}
+
+.ing-name {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.5px;
+    margin: 0;
+    word-break: break-word;
+}
+
+.ing-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.ing-unit-badge {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--samsung-blue);
+    background: var(--samsung-blue-light);
+    padding: 4px 14px;
+    border-radius: 20px;
+}
+
+.ing-desc {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.ing-author {
+    margin-top: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.author-link {
+    color: var(--samsung-blue);
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.author-link:hover { text-decoration: underline; }
+
+/* ── 관리자 버튼 ─────────────────────────────────────────── */
+.admin-actions {
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;
+    align-self: flex-start;
+}
+
+.btn-admin-edit,
+.btn-admin-delete {
+    padding: 8px 18px;
+    border: none;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 700;
+    font-family: inherit;
+    cursor: pointer;
+    transition: opacity var(--transition-fast), transform var(--transition-fast);
+}
+
+.btn-admin-edit {
+    background: var(--samsung-blue-light);
+    color: var(--samsung-blue);
+}
+
+.btn-admin-delete {
+    background: #fdecea;
+    color: #e53935;
+}
+
+.btn-admin-edit:hover,
+.btn-admin-delete:hover {
+    opacity: 0.8;
+    transform: translateY(-1px);
+}
+
+/* ── 캐비닛 버튼 ─────────────────────────────────────────── */
+.ing-actions-row {
+    flex-basis: 100%;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+    margin-top: 4px;
+}
+
+.btn-cabinet {
+    padding: 10px 24px;
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: inherit;
+    cursor: pointer;
+    color: var(--text-primary);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: background var(--transition-fast),
+                border-color var(--transition-fast),
+                color var(--transition-fast);
+}
+
+.btn-cabinet:hover:not(:disabled) {
+    border-color: var(--samsung-blue);
+    color: var(--samsung-blue);
+    background: var(--samsung-blue-light);
+}
+
+.btn-cabinet.in-cabinet {
+    background: #e8f5e9;
+    border-color: #43a047;
+    color: #2e7d32;
+}
+
+.btn-cabinet.in-cabinet:hover:not(:disabled) {
+    background: #fdecea;
+    border-color: #e53935;
+    color: #e53935;
+}
+
+.btn-cabinet:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* ── 사용 칵테일 섹션 ─────────────────────────────────────── */
+.cocktail-usage-section {
+    margin-bottom: 60px;
+}
+
+.section-title {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--samsung-blue);
+}
+
+.usage-count {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.cocktail-usage-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.usage-empty {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 14px;
+    font-weight: 600;
+    padding: 40px 0;
+}
+
+/* ── 모달 (cocktail_detail.css와 동일 패턴) ─────────────── */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 500;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.modal-overlay.open { display: flex; }
+
+.modal-box {
+    background: var(--surface);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-lg);
+    width: 100%;
+    max-width: 480px;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px 16px;
+    border-bottom: 1px solid var(--border);
+    flex-shrink: 0;
+}
+
+.modal-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    font-size: 18px;
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 4px;
+    line-height: 1;
+}
+
+.modal-close:hover { color: var(--text-primary); }
+
+.modal-body {
+    padding: 20px 24px;
+    overflow-y: auto;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.modal-body select,
+.modal-body textarea {
+    padding: 12px 14px;
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--bg);
+    color: var(--text-primary);
+    font-size: 14px;
+    font-family: inherit;
+    width: 100%;
+}
+
+.modal-body select:focus,
+.modal-body textarea:focus {
+    outline: none;
+    border-color: var(--samsung-blue);
+    box-shadow: 0 0 0 3px rgba(20,40,160,0.08);
+}
+
+.modal-body textarea { resize: vertical; }
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding: 16px 24px;
+    border-top: 1px solid var(--border);
+    flex-shrink: 0;
+}
+
+.btn-modal-cancel {
+    padding: 10px 22px;
+    background: var(--bg);
+    border: 1.5px solid var(--border);
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    color: var(--text-primary);
+    transition: background var(--transition-fast);
+}
+
+.btn-modal-cancel:hover { background: var(--border); }
+
+.btn-modal-submit {
+    padding: 10px 28px;
+    background: var(--samsung-blue);
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background var(--transition-fast);
+}
+
+.btn-modal-submit:hover:not(:disabled) { background: var(--samsung-blue-hover); }
+.btn-modal-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* ── 반응형 ──────────────────────────────────────────────── */
+@media (max-width: 600px) {
+    .ing-detail-card {
+        flex-direction: column;
+        gap: 16px;
+        padding: 24px 20px;
+    }
+
+    .admin-actions { align-self: stretch; }
+
+    .modal-overlay { padding: 0; align-items: flex-end; }
+    .modal-box {
+        border-radius: var(--radius) var(--radius) 0 0;
+        max-height: 92vh;
+    }
+}

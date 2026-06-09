@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% block title %}캐비닛 검색 - COCKTAIL FINDER{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='cabinet_search.css') }}">
+{% endblock %}
+
+{% block content %}
+        <!-- 페이지 헤더 -->
+        <section class="finder-header">
+            <h2>🗄️ 캐비닛 검색</h2>
+            <p class="finder-desc">캐비닛에 보관한 재료로 만들 수 있는 칵테일을 찾아드립니다.</p>
+        </section>
+
+        <!-- 내 캐비닛 재료 -->
+        <section class="cabinet-ing-section">
+            <div class="ingredient-section-header">
+                <span class="section-title">내 캐비닛 재료</span>
+                <span class="selected-badge" id="cabinetCountBadge">불러오는 중...</span>
+            </div>
+            <div id="cabinetChips" class="cabinet-chips-row">
+                <span class="cabinet-chip-placeholder">로딩 중...</span>
+            </div>
+            <a href="/cabinet" class="cabinet-manage-link">+ 캐비닛 관리하러 가기</a>
+        </section>
+
+        <!-- 이중검색 -->
+        <section class="dual-search-section">
+            <div class="ingredient-section-header">
+                <span class="section-title">이중검색</span>
+                <span class="dual-search-desc">선택한 재료가 반드시 포함된 칵테일만 표시합니다</span>
+            </div>
+            <div class="dual-search-wrap">
+                <div class="dual-input-wrap">
+                    <input type="text" id="dualSearchInput" class="dual-search-input"
+                           placeholder="재료 이름 검색..."
+                           autocomplete="off"
+                           oninput="handleDualInput()">
+                    <button class="dual-clear-btn" id="dualClearBtn"
+                            onclick="clearDualSearch()" style="display:none">✕ 초기화</button>
+                </div>
+                <ul class="suggestion-dropdown" id="dualDropdown"></ul>
+            </div>
+        </section>
+
+        <!-- 검색 결과 -->
+        <section class="results-section" id="resultsSection">
+            <div id="resultsList" class="results-list">
+                <div class="loading-state">검색 중...</div>
+            </div>
+        </section>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='utils.js') }}"></script>
+<script src="{{ url_for('static', filename='cabinet_search.js') }}"></script>
+{% endblock %}
