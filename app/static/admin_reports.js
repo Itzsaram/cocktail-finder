@@ -115,7 +115,7 @@ function renderPendingTable(reports, append) {
             <td>${escapeHtml(r.reason_label)}</td>
             <td>${escapeHtml(r.reporter_name)} <span class="reporter-id">(${escapeHtml(r.reporter_id)})</span></td>
             <td>${escapeHtml(r.created_at)}</td>
-            <td><button class="btn-resolve" onclick="openResolveModal(${r.report_id}, ${JSON.stringify(r.target_type)}, ${JSON.stringify(String(r.target_id))}, ${JSON.stringify(r.reason_label)})">처리</button></td>`;
+            <td><button class="btn-resolve" onclick="openResolveModal(${r.report_id}, ${escapeHtml(JSON.stringify(r.target_type))}, ${escapeHtml(JSON.stringify(String(r.target_id)))}, ${escapeHtml(JSON.stringify(r.reason_label))})">처리</button></td>`;
         tbody.appendChild(tr);
     });
 }
