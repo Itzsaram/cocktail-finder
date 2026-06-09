@@ -43,6 +43,8 @@ def save_image(file):
     return f"uploads/{filename}"
 
 # PostgreSQL 연결 설정
+DATABASE_URL = os.environ.get('DATABASE_URL')
+
 DB_CONFIG = {
     'host':     os.environ.get('DB_HOST', 'localhost'),
     'port':     int(os.environ.get('DB_PORT', 5432)),
@@ -53,7 +55,10 @@ DB_CONFIG = {
 
 def get_db_connection():
     """데이터베이스 연결 (격리 수준: Read Committed 고정)"""
-    conn = psycopg2.connect(**DB_CONFIG)
+    if DATABASE_URL:
+        conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+    else:
+        conn = psycopg2.connect(**DB_CONFIG)
     conn.set_isolation_level(psycopg2.extensions.ISOLATION_LEVEL_READ_COMMITTED)
     return conn
 
